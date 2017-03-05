@@ -86,7 +86,6 @@ public class SearchController implements SearchView.OnQueryTextListener {
         mSearchUIUpdater.handleError(errorMessage.getErrorMessage());
     }
 
-
     public void setUIUpdater(SearchUIUpdater searchUIUpdater) {
         mSearchUIUpdater = searchUIUpdater;
     }

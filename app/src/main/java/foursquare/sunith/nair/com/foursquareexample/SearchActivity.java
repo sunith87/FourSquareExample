@@ -79,13 +79,17 @@ public class SearchActivity extends AppCompatActivity implements SearchUIUpdater
             mRecyclerView.setAdapter(adapter);
         } else {
             mRecyclerView.setAdapter(null);
-            Snackbar.make(mRootView, USE_SEARCHBAR_TO_SEARCH_FOR_VENUES, Snackbar.LENGTH_LONG).show();
+            showSnackBarError(USE_SEARCHBAR_TO_SEARCH_FOR_VENUES);
         }
+    }
+
+    private void showSnackBarError(String message) {
+        Snackbar.make(mRootView,message , Snackbar.LENGTH_LONG).show();
     }
 
     @Override
     public void handleError(String message) {
-        Snackbar.make(mRootView, message, Snackbar.LENGTH_LONG).show();
+        showSnackBarError(message);
     }
 
     @Override
