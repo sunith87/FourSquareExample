@@ -6,7 +6,6 @@ import android.support.v7.widget.SearchView;
 
 import foursquare.sunith.nair.com.foursquareexample.download.LatLong;
 import foursquare.sunith.nair.com.foursquareexample.download.SearchApi;
-import foursquare.sunith.nair.com.foursquareexample.geolocation.ErrorMessage;
 import foursquare.sunith.nair.com.foursquareexample.geolocation.GeoLocationAsyncTask;
 import foursquare.sunith.nair.com.foursquareexample.geolocation.GeoLocationResult;
 

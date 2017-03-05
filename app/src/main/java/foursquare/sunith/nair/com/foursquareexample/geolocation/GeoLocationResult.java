@@ -1,6 +1,7 @@
 package foursquare.sunith.nair.com.foursquareexample.geolocation;
 
 import android.location.Address;
+import foursquare.sunith.nair.com.foursquareexample.ErrorMessage;
 
 public class GeoLocationResult implements ErrorMessage {
     private final Address address;

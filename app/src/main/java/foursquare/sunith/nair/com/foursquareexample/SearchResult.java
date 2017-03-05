@@ -3,7 +3,6 @@ package foursquare.sunith.nair.com.foursquareexample;
 import java.util.List;
 
 import foursquare.sunith.nair.com.foursquareexample.download.SearchData;
-import foursquare.sunith.nair.com.foursquareexample.geolocation.ErrorMessage;
 
 public class SearchResult implements ErrorMessage {
 
@@ -15,6 +14,7 @@ public class SearchResult implements ErrorMessage {
         this.errorMessage = errorMessage;
     }
 
+    @Override
     public String getErrorMessage() {
         String error;
         if (errorMessage != null) {

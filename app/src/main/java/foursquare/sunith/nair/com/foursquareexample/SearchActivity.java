@@ -34,6 +34,7 @@ public class SearchActivity extends AppCompatActivity implements SearchUIUpdater
         mRootView = findViewById(R.id.rootView);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(linearLayoutManager);
+        showSnackBarError(USE_SEARCHBAR_TO_SEARCH_FOR_VENUES);
     }
 
     @Override
