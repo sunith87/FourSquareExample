@@ -31,7 +31,7 @@ public class SearchActivity extends AppCompatActivity implements SearchUIUpdater
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
         mRecyclerView = (RecyclerView) findViewById(R.id.search_list);
-        mRootView = (View) findViewById(R.id.rootView);
+        mRootView = findViewById(R.id.rootView);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(linearLayoutManager);
     }
@@ -45,7 +45,6 @@ public class SearchActivity extends AppCompatActivity implements SearchUIUpdater
         mSearchView = (SearchView) MenuItemCompat.getActionView(searchViewItem);
         mSearchView.setOnQueryTextListener(getOnQueryTextListener());
         return super.onCreateOptionsMenu(menu);
-
     }
 
     @Override
@@ -65,7 +64,6 @@ public class SearchActivity extends AppCompatActivity implements SearchUIUpdater
         SearchView.OnQueryTextListener onQueryTextListener = getSearchController();
         return onQueryTextListener;
     }
-
 
     public SearchController getSearchController() {
         FourSqaureApplication application = (FourSqaureApplication) getApplication();
