@@ -21,9 +21,15 @@ public class SearchController implements SearchView.OnQueryTextListener {
     }
 
     @Override
-    public boolean onQueryTextSubmit(String query) {
-        findPlace(query);
+    public boolean onQueryTextChange(String newText) {
         return false;
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        mSearchUIUpdater.getSearchView().clearFocus();
+        findPlace(query);
+        return true;
     }
 
     private void findPlace(String query) {
@@ -78,10 +84,6 @@ public class SearchController implements SearchView.OnQueryTextListener {
         mSearchUIUpdater.handleError(errorMessage.getErrorMessage());
     }
 
-    @Override
-    public boolean onQueryTextChange(String newText) {
-        return false;
-    }
 
     public void setUIUpdater(SearchUIUpdater searchUIUpdater) {
         mSearchUIUpdater = searchUIUpdater;

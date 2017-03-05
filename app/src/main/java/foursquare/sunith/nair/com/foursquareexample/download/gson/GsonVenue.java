@@ -7,7 +7,7 @@ class GsonVenue {
     String name;
 
     @SerializedName("contact")
-    String contact;
+    GsonContact contact;
 
     @SerializedName("location")
     GsonLocation gsonLocation;

@@ -1,10 +1,8 @@
 package foursquare.sunith.nair.com.foursquareexample.download;
 
-import com.google.gson.Gson;
-
 import java.util.List;
 
-import foursquare.sunith.nair.com.foursquareexample.download.gson.GsonSearchData;
+import foursquare.sunith.nair.com.foursquareexample.download.gson.GsonEvaluator;
 
 public class VenuesSearchResult {
 
@@ -40,15 +38,8 @@ public class VenuesSearchResult {
     }
 
     public List<SearchData> getSearchData() {
-        Gson gson = new Gson();
-        GsonSearchData gsonSearchData = gson.fromJson(data, GsonSearchData.class);
-        return evaluateData(gsonSearchData);
+        return GsonEvaluator.evaluateDataFromGson(data);
     }
-
-    private List<SearchData> evaluateData(GsonSearchData gsonSearchData) {
-        return null;
-    }
-
 
     public static class Builder {
         private final int httpCode;

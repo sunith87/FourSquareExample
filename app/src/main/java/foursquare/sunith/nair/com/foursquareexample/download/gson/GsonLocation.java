@@ -7,4 +7,5 @@ class GsonLocation {
 
     @SerializedName("formattedAddress")
     List<String> formattedAddress;
+
 }

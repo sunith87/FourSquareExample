@@ -7,4 +7,5 @@ class GsonResponse {
 
     @SerializedName("venues")
     List<GsonVenue> gson_venues;
+
 }
