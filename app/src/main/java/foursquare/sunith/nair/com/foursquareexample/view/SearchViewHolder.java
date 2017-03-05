@@ -15,6 +15,15 @@ class SearchViewHolder extends RecyclerView.ViewHolder {
     }
 
     public void bind(SearchData data) {
+        searchResultView(data);
+    }
+
+    private void firstItemView(String queryMessage) {
+        TextView name = (TextView) itemView.findViewById(R.id.searchTerm);
+        name.setText(queryMessage);
+    }
+
+    private void searchResultView(SearchData data) {
         TextView name = (TextView) itemView.findViewById(R.id.venue_name);
         TextView details = (TextView) itemView.findViewById(R.id.venue_otherDetails);
 
@@ -25,5 +34,9 @@ class SearchViewHolder extends RecyclerView.ViewHolder {
         } else {
             details.setVisibility(View.GONE);
         }
+    }
+
+    public void bind(String message) {
+            firstItemView(message);
     }
 }

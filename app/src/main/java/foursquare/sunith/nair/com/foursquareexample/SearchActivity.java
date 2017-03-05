@@ -11,17 +11,19 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-
 import java.util.List;
-
 import foursquare.sunith.nair.com.foursquareexample.download.SearchData;
 import foursquare.sunith.nair.com.foursquareexample.view.SearchAdapter;
+import foursquare.sunith.nair.com.foursquareexample.view.SearchDataListParcelable;
 
 public class SearchActivity extends AppCompatActivity implements SearchUIUpdater {
 
+    private static final String SEARCH_DATA_LIST = "foursquare.sunith.nair.com.foursquareexample.SearchActivity.SEARCH_DATA_LIST";
+    public static final String USE_SEARCHBAR_TO_SEARCH_FOR_VENUES = "Use Searchbar to search for venues";
     private RecyclerView mRecyclerView;
     private View mRootView;
     private SearchView mSearchView;
+    private SearchDataListParcelable mSearchDataParcelable;
 
 
     @Override
@@ -46,6 +48,19 @@ public class SearchActivity extends AppCompatActivity implements SearchUIUpdater
 
     }
 
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putParcelable(SEARCH_DATA_LIST, mSearchDataParcelable);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        SearchDataListParcelable parcelable = savedInstanceState.getParcelable(SEARCH_DATA_LIST);
+        handleSuccess(parcelable.getDataList(), parcelable.getQueryPlaced());
+    }
+
     private SearchView.OnQueryTextListener getOnQueryTextListener() {
         SearchView.OnQueryTextListener onQueryTextListener = getSearchController();
         return onQueryTextListener;
@@ -57,10 +72,17 @@ public class SearchActivity extends AppCompatActivity implements SearchUIUpdater
         return application.getSearchController(this);
     }
 
-
     @Override
-    public void handleSuccess(List<SearchData> searchDataList) {
-        mRecyclerView.setAdapter(new SearchAdapter(searchDataList));
+    public void handleSuccess(List<SearchData> searchDataList, String queryPlaced) {
+        mSearchDataParcelable = new SearchDataListParcelable(searchDataList, queryPlaced);
+
+        if (searchDataList != null && !searchDataList.isEmpty()) {
+            SearchAdapter adapter = new SearchAdapter(searchDataList, queryPlaced);
+            mRecyclerView.setAdapter(adapter);
+        } else {
+            mRecyclerView.setAdapter(null);
+            Snackbar.make(mRootView, USE_SEARCHBAR_TO_SEARCH_FOR_VENUES, Snackbar.LENGTH_LONG).show();
+        }
     }
 
     @Override
@@ -69,7 +91,9 @@ public class SearchActivity extends AppCompatActivity implements SearchUIUpdater
     }
 
     @Override
-    public SearchView getSearchView() {
-        return mSearchView;
+    public void searchStarted(String query) {
+        mSearchView.clearFocus();
+        mRecyclerView.setAdapter(null);
+        Snackbar.make(mRootView, "Searching for venues in " + query, Snackbar.LENGTH_LONG).show();
     }
 }

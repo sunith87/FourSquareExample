@@ -14,6 +14,7 @@ public class SearchController implements SearchView.OnQueryTextListener {
     private final FourSqaureApplication mFourSqaureApplication;
     private SearchUIUpdater mSearchUIUpdater;
     private final SearchApi mSearchApi;
+    private String queryPlaced;
 
     public SearchController(FourSqaureApplication fourSqaureApplication) {
         mFourSqaureApplication = fourSqaureApplication;
@@ -27,8 +28,9 @@ public class SearchController implements SearchView.OnQueryTextListener {
 
     @Override
     public boolean onQueryTextSubmit(String query) {
-        mSearchUIUpdater.getSearchView().clearFocus();
+        mSearchUIUpdater.searchStarted(query);
         findPlace(query);
+        queryPlaced = query;
         return true;
     }
 
@@ -77,7 +79,7 @@ public class SearchController implements SearchView.OnQueryTextListener {
     }
 
     private void handleSuccess(SearchResult searchResult) {
-        mSearchUIUpdater.handleSuccess(searchResult.getSearchData());
+        mSearchUIUpdater.handleSuccess(searchResult.getSearchData(),queryPlaced);
     }
 
     private void handleError(ErrorMessage errorMessage) {
